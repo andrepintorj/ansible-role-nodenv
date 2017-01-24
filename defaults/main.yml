@@ -1,0 +1,6 @@
+---
+  nodenv_user: "ubuntu"
+  nodenv_path: ".nodenv"
+  nodenv_version: "1.0.0"
+  nodenv_versions:
+    - 5.6.0
