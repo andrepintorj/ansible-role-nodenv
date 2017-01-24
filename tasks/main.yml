@@ -15,7 +15,7 @@
   become_user: "{{ user }}"
   when: nvd.stat.isdir is not defined
   git:
-    repo: https://github.com/wfarr/nodenv.git
+    repo: https://github.com/nodenv/nodenv.git
     dest: /home/{{ user }}/{{ nodenv_path }}
 
 - name: create versions directory
