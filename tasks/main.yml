@@ -16,7 +16,29 @@
   when: nvd.stat.isdir is not defined
   git:
     repo: https://github.com/nodenv/nodenv.git
-    dest: /home/{{ user }}/{{ nodenv_path }}
+    dest: /home/{{ nodenv_user }}/{{ nodenv_path }}
+
+- name: check if node-build is installed
+  stat:
+    path: /home/{{ nodenv_user }}/{{ nodenv_path }}/plugins/node-build
+  register: nbbd
+
+- name: download latest version of node-build
+  become_user: "{{ nodenv_user }}"
+  when: nbbd.stat.isdir is not defined
+  git:
+    repo: https://github.com/nodenv/node-build.git
+    dest: /home/{{ nodenv_user }}/{{ nodenv_path }}/plugins/node-build
+
+- name: create versions directory
+  become_user: "{{ nodenv_user }}"
+  file:
+    path: /home/{{ nodenv_user }}/{{ item }}
+    state: directory
+    mode: 0775
+  with_items:
+    - "{{ nodenv_path }}/versions"
+
 
 - name: create versions directory
   become_user: "{{ nodenv_user }}"
