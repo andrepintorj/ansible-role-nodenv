@@ -67,7 +67,7 @@
     nodes: "{{ nodenv_versions | difference(installed_nodes.stdout_lines) }}"
 
 - name: install versions {{ nodes }}
-  become_nodenv_user: "{{ nodenv_user }}"
+  become_user: "{{ nodenv_user }}"
   shell:
     ~/{{ nodenv_path }}/bin/nodenv install "{{ item }}"
   with_items: "{{ nodes }}"
