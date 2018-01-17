@@ -30,7 +30,7 @@
 - name: install {{ nodenv_version }}
   become_user: "{{ user }}"
   lineinfile:
-    dest: .bashrc
+    dest: /home/{{ user }}/.bashrc
     line: "{{ item }}"
   with_items:
     - 'export PATH=~/{{ nodenv_path }}/bin:$PATH'
